@@ -6,6 +6,7 @@
 package banksim;
 import java.util.*;
 
+
 /**
  *
  * @author Alex
@@ -20,7 +21,7 @@ public class BankSim {
         Scanner in = new Scanner(System.in);
         int selection;
         boolean running = true;
-        HashMap accountList = new HashMap();
+        HashMap<String, SavingsAccount> accountList = new HashMap<>();
         
         while(running){
             System.out.println("\n**********************************");
@@ -64,7 +65,7 @@ public class BankSim {
     
     
     //access and edit account function
-    public static void accessAcct(HashMap accountList){
+    public static void accessAcct(HashMap<String, SavingsAcount> accountList){
         Scanner in = new Scanner(System.in);
         String acctName;
         int selection;
@@ -83,13 +84,14 @@ public class BankSim {
         
     }
     
-    public static void printInfo(String name, HashMap accountList){
-        SavingsAccount thisAcct = accountList.get(name);
+    public static void printInfo(String name, HashMap<String, SavingsAcount> accountList){
+        if(accountList.containsKey(name)){
+            SavingsAccount thisAccount = accountList.get(name);
         
-        System.out.println("\n**********************************");
-        System.out.printf("Name: %s\n", name);
-        System.out.printf("Balance: ");
-        System.out.println(accountList.get(name).getSavBal());
-        
+            System.out.println("\n**********************************");
+            System.out.printf("Name: %s\n", name);
+            System.out.printf("Balance: ");
+            System.out.println(accountList.get(name).getSavBal());
+        }
     }
 }
