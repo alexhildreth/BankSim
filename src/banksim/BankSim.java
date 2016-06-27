@@ -1,31 +1,23 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * BankSim by Alex Hildreth
+ * A short banking simulator utilizing parent and child classes
+ * stored in a hashmap
  */
 package banksim;
 import java.util.*;
 
-
-/**
- *
- * @author Alex
- */
-
 public class BankSim {
-    
-    //this has to be global and static for now, will figure out why passing it
-    //as an argument was not working
-    //public static HashMap<String, SavingsAccount> accountList = new HashMap<>();
     
     //main
     public static void main(String[] args) {
+        
         Scanner in = new Scanner(System.in);
         int selection;
         boolean running = true;
+        //hashmap to store account objects in
         HashMap<String, SavingsAccount> accountList = new HashMap<>();
         
-        
+        //main program menu loop
         while(running){
             System.out.println("\n**********************************");
             System.out.println("Welcome to BankSim!");
@@ -49,6 +41,8 @@ public class BankSim {
     
     
     //account creation function
+    //accepts a name for the new account and an initial balance and
+    //creates a new hashmap key value pair containing the account
     public static void makeAcct(HashMap<String, SavingsAccount> accountList){
         Scanner in = new Scanner(System.in);
         String newName;
@@ -60,6 +54,7 @@ public class BankSim {
         System.out.println("Enter initial balance: ");
         newBal = in.nextDouble();
         
+        //create new account
         accountList.put(newName, new SavingsAccount(newName, newBal));
         
         System.out.println("Creation successful, returning to menu...");
@@ -67,6 +62,7 @@ public class BankSim {
     
     
     //access and edit account function
+    //provides a menu to jump to other account option functions
     public static void accessAcct(HashMap<String, SavingsAccount> accountList){
         Scanner in = new Scanner(System.in);
         String acctName;
@@ -94,6 +90,9 @@ public class BankSim {
     }
     
     
+    //print account info function
+    //accepts the account name and account hashmap
+    //pulls the basic account info from the hashmap and prints it
     public static void printInfo(String name, HashMap<String, SavingsAccount> accountList){
         if(accountList.containsKey(name)){
             System.out.println("\n**********************************");
@@ -106,6 +105,9 @@ public class BankSim {
     }
     
     
+    //withdraw function
+    //gets a withdrawal amount and calls the account class withdraw function
+    //then prints the new balance
     public static void withdraw(String name, HashMap<String, SavingsAccount> accountList){
         Scanner in = new Scanner(System.in);
         double amt;
@@ -118,6 +120,9 @@ public class BankSim {
     }
     
     
+    //deposit function
+    //gets a deposit amount and calls the account class deposit function
+    //then prints the new balance
     public static void deposit(String name, HashMap<String, SavingsAccount> accountList){
         Scanner in = new Scanner(System.in);
         double amt;
