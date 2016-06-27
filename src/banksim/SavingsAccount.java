@@ -25,16 +25,16 @@ public class SavingsAccount extends Account {
     }
     
     //setter
-    void setSavBal(float bal){
+    void setSavBal(double bal){
         savingsBal = bal;
     }
     
     //class functions to deposit or withdraw
-    void withdrawSav(float amount){
+    void withdrawSav(double amount){
         savingsBal = this.getSavBal() - amount;
     }
     
-    void depositSav(float amount){
+    void depositSav(double amount){
         savingsBal = this.getSavBal() + amount;
     }
     

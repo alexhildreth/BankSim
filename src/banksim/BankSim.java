@@ -13,15 +13,18 @@ import java.util.*;
  */
 
 public class BankSim {
-
-    /**
-     * @param args the command line arguments
-     */
+    
+    //this has to be global and static for now, will figure out why passing it
+    //as an argument was not working
+    //public static HashMap<String, SavingsAccount> accountList = new HashMap<>();
+    
+    //main
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int selection;
         boolean running = true;
         HashMap<String, SavingsAccount> accountList = new HashMap<>();
+        
         
         while(running){
             System.out.println("\n**********************************");
@@ -33,21 +36,20 @@ public class BankSim {
             selection = in.nextInt();
             
             //process selection
-            if(selection == 1){
-                makeAcct(accountList);
-            }
-            else if(selection == 2){
-                accessAcct(accountList);
-            }
-            else if(selection == 3){
-                running = false;
+            switch(selection){
+                case 1: makeAcct(accountList);
+                        break;
+                case 2: accessAcct(accountList);
+                        break;
+                case 3: running = false;
+                        break;
             }
         }
     }
     
     
     //account creation function
-    public static void makeAcct(HashMap accountList){
+    public static void makeAcct(HashMap<String, SavingsAccount> accountList){
         Scanner in = new Scanner(System.in);
         String newName;
         double newBal;
@@ -65,7 +67,7 @@ public class BankSim {
     
     
     //access and edit account function
-    public static void accessAcct(HashMap<String, SavingsAcount> accountList){
+    public static void accessAcct(HashMap<String, SavingsAccount> accountList){
         Scanner in = new Scanner(System.in);
         String acctName;
         int selection;
@@ -75,23 +77,55 @@ public class BankSim {
         acctName = in.nextLine();
         
         System.out.println("1. Print Account Info");
+        System.out.println("2. Withdraw Money");
+        System.out.println("3. Deposit Money");
       
         selection = in.nextInt();
         
-        if(selection == 1){
-            printInfo(acctName, accountList);
+        switch(selection){
+            case 1: printInfo(acctName, accountList);
+                    break;
+            case 2: withdraw(acctName, accountList);
+                    break;
+            case 3: deposit(acctName, accountList);
+                    break;
         }
         
     }
     
-    public static void printInfo(String name, HashMap<String, SavingsAcount> accountList){
+    
+    public static void printInfo(String name, HashMap<String, SavingsAccount> accountList){
         if(accountList.containsKey(name)){
-            SavingsAccount thisAccount = accountList.get(name);
-        
             System.out.println("\n**********************************");
-            System.out.printf("Name: %s\n", name);
+            System.out.printf("Name: ");
+            System.out.println(accountList.get(name).getName());
             System.out.printf("Balance: ");
             System.out.println(accountList.get(name).getSavBal());
+            System.out.println("\nReturning to main menu...");
         }
+    }
+    
+    
+    public static void withdraw(String name, HashMap<String, SavingsAccount> accountList){
+        Scanner in = new Scanner(System.in);
+        double amt;
+        System.out.println("Enter windrawal amount: ");
+        amt = in.nextDouble();
+        
+        accountList.get(name).withdrawSav(amt);
+        System.out.printf("Success, new balance: ");
+        System.out.println(accountList.get(name).getSavBal());
+    }
+    
+    
+    public static void deposit(String name, HashMap<String, SavingsAccount> accountList){
+        Scanner in = new Scanner(System.in);
+        double amt;
+        System.out.println("Enter deposit amount: ");
+        amt = in.nextDouble();
+        
+        accountList.get(name).depositSav(amt);
+        System.out.printf("Success, new balance: ");
+        System.out.println(accountList.get(name).getSavBal());
     }
 }
