@@ -84,6 +84,8 @@ public class BankSim {
     }
     
     public static void printInfo(String name, HashMap accountList){
+        SavingsAccount thisAcct = accountList.get(name);
+        
         System.out.println("\n**********************************");
         System.out.printf("Name: %s\n", name);
         System.out.printf("Balance: ");
