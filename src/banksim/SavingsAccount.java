@@ -11,16 +11,16 @@ package banksim;
  */
 public class SavingsAccount extends Account {
     //class variables
-    private float savingsBal;
+    private double savingsBal;
     
     //construct
-    SavingsAccount(String _name, float bal){
+    SavingsAccount(String _name, double bal){
         super(_name);
         savingsBal = bal;
     }
     
     //getter
-    float getSavBal(){
+    double getSavBal(){
         return savingsBal;
     }
     
